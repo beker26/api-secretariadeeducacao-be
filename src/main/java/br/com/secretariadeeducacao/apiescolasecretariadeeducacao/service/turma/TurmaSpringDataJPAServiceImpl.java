@@ -1,5 +1,5 @@
 package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.turma;
 
-public class TurmaServiceImpl {
+public class TurmaSpringDataJPAServiceImpl {
 
 }

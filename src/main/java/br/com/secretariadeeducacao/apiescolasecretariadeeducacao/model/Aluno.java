@@ -9,21 +9,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Aluno {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private List<Turma> turma = new ArrayList<>();
-	@ManyToOne
-	private Escola escola;
+	@ManyToMany
+	private List<Turma> turmas = new ArrayList<>();
 
 	public Aluno() {
 	}
@@ -44,20 +40,8 @@ public class Aluno {
 		this.nome = nome;
 	}
 
-	public List<Turma> getTurma() {
-		return turma;
-	}
-
-	public void setTurma(List<Turma> turma) {
-		this.turma = turma;
-	}
-
-	public Escola getEscola() {
-		return escola;
-	}
-
-	public void setEscola(Escola escola) {
-		this.escola = escola;
+	public List<Turma> getTurmas() {
+		return turmas;
 	}
 
 	@Override
@@ -84,5 +68,4 @@ public class Aluno {
 			return false;
 		return true;
 	}
-
 }

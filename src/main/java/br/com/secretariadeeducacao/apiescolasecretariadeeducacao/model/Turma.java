@@ -3,9 +3,9 @@ package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,12 +14,11 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Turma {
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany
 	private List<Aluno> alunos = new ArrayList<>();
 	@ManyToOne
 	private Escola escola;
@@ -46,8 +45,8 @@ public class Turma {
 		return alunos;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
-		this.alunos = alunos;
+	public void adicionaAluno(Aluno aluno) {
+		this.alunos.add(aluno);
 	}
 
 	public Escola getEscola() {
@@ -82,8 +81,4 @@ public class Turma {
 			return false;
 		return true;
 	}
-	
-	
-	
-
 }

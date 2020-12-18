@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+
 @Entity
 public class Escola {
 	@Id
@@ -20,7 +21,11 @@ public class Escola {
 	@OneToMany
 	private List<Turma> turmas = new ArrayList<>();
 
-	public Escola() {
+	public Escola() {}
+
+	public Escola(String nome, List<Turma> turmas) {
+		this.nome = nome;
+		this.turmas = turmas;
 	}
 
 	public Integer getId() {
@@ -71,5 +76,7 @@ public class Escola {
 			return false;
 		return true;
 	}
+
+	
 
 }

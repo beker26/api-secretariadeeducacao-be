@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.Repository.EscolaRepository;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.Repository.TurmaRepository;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.EscolaForm;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Escola;
 import lombok.extern.log4j.Log4j2;
 
@@ -13,9 +15,11 @@ import lombok.extern.log4j.Log4j2;
 public class EscolaSpringDataJPAService implements EscolaService {
 
 	private EscolaRepository escolaRepository;
+	private TurmaRepository turmaRepository;
 
-	public EscolaSpringDataJPAService(EscolaRepository escolaRepository) {
+	public EscolaSpringDataJPAService(EscolaRepository escolaRepository, TurmaRepository turmaRepository) {
 		this.escolaRepository = escolaRepository;
+		this.turmaRepository = turmaRepository;
 	}
 
 	@Override
@@ -34,6 +38,13 @@ public class EscolaSpringDataJPAService implements EscolaService {
 		Escola escola = escolaRepository.findById(id)
 				.orElseThrow(() -> new RuntimeException("Objeto não encontrado"));
 		log.info("Finishing Method findById in EscolaSpringDataJPAService");
+		return escola;
+	}
+
+	@Override
+	public Escola save(Escola escola, EscolaForm escolaForm) {
+		escola = escolaForm.convert(turmaRepository);
+		escola = escolaRepository.save(escola);
 		return escola;
 	}
 

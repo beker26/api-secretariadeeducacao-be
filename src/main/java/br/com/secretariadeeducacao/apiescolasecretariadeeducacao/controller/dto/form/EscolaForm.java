@@ -17,5 +17,7 @@ public class EscolaForm {
 		return nome;
 	}
 
-	
+	public Escola toEscola() {
+		return new Escola(this.getNome());
+	}
 }

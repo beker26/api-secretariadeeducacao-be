@@ -47,24 +47,28 @@ public class EscolaController implements EscolaApi {
 	}
 
 	public ResponseEntity<EscolaDto> insert(@Validated @RequestBody EscolaForm escolaForm,UriComponentsBuilder  uriBuilder) {
-        Escola escolaObj = escolaService.fromDto(escolaForm);
-		escolaObj = escolaService.insert(escolaObj);
-		URI uri = uriBuilder.path("/escola/{id}").buildAndExpand(escolaObj.getId()).toUri();
-		return ResponseEntity.created(uri).body(new EscolaDto(escolaObj));
+		log.info("Starting Method insert in Escola Controller!");
+		log.info("Form: {}", escolaForm);
+		Escola escola = escolaService.insert(escolaForm.toEscola());
+		log.info("Finishing Method insert in Escola Controller!");
+		URI uri = uriBuilder.path("/escola/{id}").buildAndExpand(escola.getId()).toUri();
+		return ResponseEntity.created(uri).body(new EscolaDto(escola));
 	}
 
 	@Override
 	public ResponseEntity<EscolaDto> update(@PathVariable Integer id, @RequestBody @Validated EscolaForm escolaForm) {
-		
-		Escola escolaObj = escolaService.fromDto(escolaForm);
-		escolaObj.setId(id);
-		escolaObj = escolaService.update(escolaObj);
+		log.info("Starting Method Update in Escola Controller!");
+		log.info("Form: {}", escolaForm);
+		escolaService.update(id,escolaForm.toEscola());
+		log.info("Finishing Method Update in Escola Controller!");
 		return ResponseEntity.noContent().build();
 	}
 
 	@Override
 	public ResponseEntity<Void> delete(Integer id) {
+		log.info("Starting Method Delete in Escola Controller!");
 		escolaService.delete(id);
+		log.info("Finishing Method Delete in Escola Controller!");
 		return ResponseEntity.noContent().build();
 	}
 

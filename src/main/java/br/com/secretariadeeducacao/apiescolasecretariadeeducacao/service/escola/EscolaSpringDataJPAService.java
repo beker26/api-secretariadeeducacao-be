@@ -1,13 +1,11 @@
 package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.escola;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.Repository.EscolaRepository;
-import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.EscolaForm;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Escola;
 import lombok.extern.log4j.Log4j2;
 
@@ -25,8 +23,9 @@ public class EscolaSpringDataJPAService implements EscolaService {
 	@Override
 	public List<Escola> findAll() {
 		log.info("Starting Method findAll in EscolaSpringDataJPAService");
+		List<Escola> listEscola = this.escolaRepository.findAll();
 		log.info("finishing Method findAll in EscolaSpringDataJPAService");
-		return this.escolaRepository.findAll();
+		return listEscola;
 
 	}
 
@@ -42,44 +41,33 @@ public class EscolaSpringDataJPAService implements EscolaService {
 
 	@Override
 	public Escola insert(Escola escolaObj) {
+		log.info("Starting Method save in EscolaSpringDataJPAService");
 		escolaObj = escolaRepository.save(escolaObj);
+		log.info("Finishing Method save in EscolaSpringDataJPAService");
 		return escolaObj;
 	}
 
-	
-
 	@Override
-	public Escola update(Escola escolaObj) {
-		Escola newObj = find(escolaObj.getId());
-		updateData(newObj, escolaObj);
-		return escolaRepository.save(newObj);
+	public Escola update(Integer id,Escola escolaByForm) {
+		log.info("Starting Method update in EscolaSpringDataJPAService");
+		Escola escolaById = findById(id);
+		escolaById.update(escolaByForm);
+		log.info("Save in EscolaRepository");
+		log.info("Finishing Method save in EscolaSpringDataJPAService");
+		return escolaRepository.save(escolaById);
 	}
 	
 	public void delete(Integer id) {
-		find(id);
+		log.info("Starting Method Delete in EscolaSpringDataJPAService");
+		log.info("Parameter:Escola Id = {}," , id);
+		findById(id);
+		log.info("Deleting escola by id on escolaRepository");
 		try {
 			escolaRepository.deleteById(id);
 		}
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Não é possível excluir");
 		}
+		log.info("Finishing Method deleteById in EscolaSpringDataJPAService");
 	}
-
-	private void updateData(Escola newObj, Escola escolaObj) {
-		newObj.setId(escolaObj.getId());
-		
-	}
-	
-	public Escola find(Integer id) {
-		Optional<Escola> obj = escolaRepository.findById(id);
-		return obj.orElseThrow(() -> new RuntimeException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Escola.class.getName()));
-	}
-	
-	@Override
-	public Escola fromDto(EscolaForm escolaForm) {
-
-		return new Escola(escolaForm.getNome());
-	}
-
 }

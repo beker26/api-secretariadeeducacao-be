@@ -6,9 +6,17 @@ import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Escola;
 
 public interface EscolaService {
-	
+
 	List<Escola> findAll();
-    Escola findById(Integer id);
-    Escola save(Escola escola, EscolaForm escolaForm);
-    
+
+	Escola findById(Integer id);
+
+	Escola insert(Escola EscolaObj);
+
+	Escola fromDto(EscolaForm escolaForm);
+
+	Escola update(Escola escolaObj);
+
+	void delete(Integer id);
+
 }

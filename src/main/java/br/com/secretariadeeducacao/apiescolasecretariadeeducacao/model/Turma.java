@@ -3,12 +3,11 @@ package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -21,9 +20,15 @@ public class Turma {
 	@ManyToMany
 	private List<Aluno> alunos = new ArrayList<>();
 	@ManyToOne
+	@JoinColumn(name = "ESCOLA_ID", referencedColumnName = "id")
 	private Escola escola;
-	
-	public Turma() {}
+
+	public Turma() {
+	}
+
+	public Turma(String nome) {
+		this.nome = nome;
+	}
 
 	public Integer getId() {
 		return id;
@@ -57,6 +62,10 @@ public class Turma {
 		this.escola = escola;
 	}
 
+	public Integer getEscolaId() {
+		return this.getEscola().getId();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -80,5 +89,13 @@ public class Turma {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getNomeEscola() {
+		return this.escola.getNome();
+	}
+
+	public void update(Turma turmaByForm) {
+		this.nome = turmaByForm.getNome();
 	}
 }

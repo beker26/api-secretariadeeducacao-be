@@ -1,16 +1,9 @@
 package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Aluno {
@@ -18,8 +11,6 @@ public class Aluno {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	@ManyToMany
-	private List<Turma> turmas = new ArrayList<>();
 
 	public Aluno() {
 	}
@@ -38,10 +29,6 @@ public class Aluno {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public List<Turma> getTurmas() {
-		return turmas;
 	}
 
 	@Override

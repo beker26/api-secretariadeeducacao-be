@@ -29,16 +29,16 @@ public interface EscolaApi {
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
 	public ResponseEntity<List<EscolaDto>> findAll();
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/{escolaId}")
 	@ResponseStatus(value = HttpStatus.OK)
-	ResponseEntity<EscolaDetailDto> findById(Integer id);
+	ResponseEntity<EscolaDetailDto> findById(Integer escolaId);
 	@PostMapping
 	@Transactional
 	ResponseEntity<EscolaDto> insert(@Validated @RequestBody EscolaForm escolaForm,UriComponentsBuilder  uriBuilder);
-	@PutMapping("/{id}")
+	@PutMapping("/{escolaId}")
 	@Transactional
-	ResponseEntity<EscolaDto> update(@PathVariable Integer id, @RequestBody @Validated EscolaForm escolaForm);
-	@DeleteMapping("/{id}")
+	ResponseEntity<EscolaDto> update(@PathVariable Integer escolaId, @RequestBody @Validated EscolaForm escolaForm);
+	@DeleteMapping("/{escolaId}")
 	@Transactional
-	ResponseEntity<Void> delete(@PathVariable Integer id);
+	ResponseEntity<Void> delete(@PathVariable Integer escolaId);
 }

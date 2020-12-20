@@ -8,12 +8,12 @@ public interface EscolaService {
 
 	List<Escola> findAll();
 
-	Escola findById(Integer id);
+	Escola findById(Integer escolaId);
 
 	Escola insert(Escola EscolaObj);
 
-	Escola update(Integer id, Escola escolaObj);
+	Escola update(Integer escolaId, Escola escolaObj);
 
-	void delete(Integer id);
+	void delete(Integer escolaId);
 
 }

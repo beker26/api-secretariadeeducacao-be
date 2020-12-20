@@ -8,22 +8,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import lombok.Data;
 
 @Entity
-@Table
-@Data
 public class Escola {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	@OneToMany
+	@OneToMany(mappedBy = "escola")
 	private List<Turma> turmas = new ArrayList<>();
 
-	public Escola() {}
+	public Escola() {
+	}
 
 	public Escola(String nome) {
 		super();
@@ -74,4 +70,5 @@ public class Escola {
 	public void update(Escola escolaByForm) {
 		this.nome = escolaByForm.getNome();
 	}
+
 }

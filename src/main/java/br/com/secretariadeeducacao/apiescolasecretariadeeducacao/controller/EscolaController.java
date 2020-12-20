@@ -15,6 +15,7 @@ import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.EscolaDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.EscolaForm;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Escola;
+
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.escola.EscolaService;
 import lombok.extern.log4j.Log4j2;
 
@@ -38,10 +39,10 @@ public class EscolaController implements EscolaApi {
 	}
 
 	@Override
-	public ResponseEntity<EscolaDetailDto> findById(Integer id) {
+	public ResponseEntity<EscolaDetailDto> findById(@PathVariable Integer escolaId) {
 		log.info("Starting Method findById in Escola Controller!");
-		log.info("Parameter id = {}", id);
-		Escola escola = escolaService.findById(id);
+		log.info("Parameter id = {}", escolaId);
+		Escola escola = escolaService.findById(escolaId);
 		log.info("Converting Escola to EscolaDto");
 		return ResponseEntity.ok().body(new EscolaDetailDto(escola));
 	}
@@ -51,23 +52,23 @@ public class EscolaController implements EscolaApi {
 		log.info("Form: {}", escolaForm);
 		Escola escola = escolaService.insert(escolaForm.toEscola());
 		log.info("Finishing Method insert in Escola Controller!");
-		URI uri = uriBuilder.path("/escola/{id}").buildAndExpand(escola.getId()).toUri();
+		URI uri = uriBuilder.path("/escola/{escolaId}").buildAndExpand(escola.getId()).toUri();
 		return ResponseEntity.created(uri).body(new EscolaDto(escola));
 	}
 
 	@Override
-	public ResponseEntity<EscolaDto> update(@PathVariable Integer id, @RequestBody @Validated EscolaForm escolaForm) {
+	public ResponseEntity<EscolaDto> update(@PathVariable Integer escolaId, @RequestBody @Validated EscolaForm escolaForm) {
 		log.info("Starting Method Update in Escola Controller!");
 		log.info("Form: {}", escolaForm);
-		escolaService.update(id,escolaForm.toEscola());
+		escolaService.update(escolaId,escolaForm.toEscola());
 		log.info("Finishing Method Update in Escola Controller!");
 		return ResponseEntity.noContent().build();
 	}
 
 	@Override
-	public ResponseEntity<Void> delete(Integer id) {
+	public ResponseEntity<Void> delete(Integer escolaId) {
 		log.info("Starting Method Delete in Escola Controller!");
-		escolaService.delete(id);
+		escolaService.delete(escolaId);
 		log.info("Finishing Method Delete in Escola Controller!");
 		return ResponseEntity.noContent().build();
 	}

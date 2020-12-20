@@ -30,11 +30,11 @@ public class EscolaSpringDataJPAService implements EscolaService {
 	}
 
 	@Override
-	public Escola findById(Integer id) {
+	public Escola findById(Integer escolaId) {
 		log.info("Starting Method findById in EscolaSpringDataJPAService");
-		log.info("Parameter:{}", id);
+		log.info("Parameter:{}", escolaId);
 		log.info("Finding Escola by id on EscolaRepository");
-		Escola escola = escolaRepository.findById(id).orElseThrow(() -> new RuntimeException("Objeto não encontrado"));
+		Escola escola = escolaRepository.findById(escolaId).orElseThrow(() -> new RuntimeException("Objeto não encontrado"));
 		log.info("Finishing Method findById in EscolaSpringDataJPAService");
 		return escola;
 	}
@@ -48,22 +48,23 @@ public class EscolaSpringDataJPAService implements EscolaService {
 	}
 
 	@Override
-	public Escola update(Integer id,Escola escolaByForm) {
+	public Escola update(Integer escolaId,Escola escolaByForm) {
 		log.info("Starting Method update in EscolaSpringDataJPAService");
-		Escola escolaById = findById(id);
+		Escola escolaById = findById(escolaId);
 		escolaById.update(escolaByForm);
 		log.info("Save in EscolaRepository");
+		escolaRepository.save(escolaById);
 		log.info("Finishing Method save in EscolaSpringDataJPAService");
-		return escolaRepository.save(escolaById);
+		return escolaById;
 	}
 	
-	public void delete(Integer id) {
+	public void delete(Integer escolaId) {
 		log.info("Starting Method Delete in EscolaSpringDataJPAService");
-		log.info("Parameter:Escola Id = {}," , id);
-		findById(id);
+		log.info("Parameter:Escola Id = {}," , escolaId);
+		findById(escolaId);
 		log.info("Deleting escola by id on escolaRepository");
 		try {
-			escolaRepository.deleteById(id);
+			escolaRepository.deleteById(escolaId);
 		}
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Não é possível excluir");

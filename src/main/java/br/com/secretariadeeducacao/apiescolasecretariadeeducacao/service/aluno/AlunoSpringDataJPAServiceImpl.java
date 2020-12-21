@@ -68,7 +68,7 @@ public class AlunoSpringDataJPAServiceImpl implements AlunoService {
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Não é possível excluir");
 		}
-		log.info("Finishing Method deleteById in EscolaSpringDataJPAService");
+		log.info("Finishing Method deleteById in ALunoSpringDataJPAService");
 		
 	}
 

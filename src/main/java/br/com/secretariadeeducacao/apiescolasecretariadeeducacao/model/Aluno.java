@@ -15,6 +15,10 @@ public class Aluno {
 	public Aluno() {
 	}
 
+	public Aluno(String nome) {
+		this.nome = nome;
+	}
+
 	public Integer getId() {
 		return id;
 	}

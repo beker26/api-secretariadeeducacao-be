@@ -12,9 +12,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.AlunoDetailDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.AlunoDto;
+
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.AlunoForm;
+
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Aluno;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.aluno.AlunoService;
+
 import lombok.extern.log4j.Log4j2;
 
 @RestController
@@ -22,6 +25,7 @@ import lombok.extern.log4j.Log4j2;
 public class AlunoController implements AlunoApi {
 
 	private AlunoService alunoService;
+	
 
 	public AlunoController(AlunoService alunoService) {
 		this.alunoService = alunoService;
@@ -64,6 +68,7 @@ public class AlunoController implements AlunoApi {
 		return ResponseEntity.noContent().build();
 	}
 
+	
 	@Override
 	public ResponseEntity<Void> delete(Integer alunoId) {
 		log.info("Starting Method Delete in Aluno Controller!");

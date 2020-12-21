@@ -13,7 +13,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.EscolaDetailDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.EscolaDto;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.TurmaDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.EscolaForm;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.TurmaForm;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Escola;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.escola.EscolaService;
@@ -72,5 +74,6 @@ public class EscolaController implements EscolaApi {
 		log.info("Finishing Method Delete in Escola Controller!");
 		return ResponseEntity.noContent().build();
 	}
+
 
 }

@@ -2,14 +2,21 @@ package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.aluno;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Aluno;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Escola;
 
-@Service
 public interface AlunoService {
 
-	public List<Aluno> FindAll();
+	List<Aluno> findAll();
+
+	Aluno findById(Integer alunoId);
+
+	Aluno insert(Aluno alunoObj);
+
+	Aluno update(Integer alunoId, Aluno alunoObj);
+
+	void delete(Integer alunoId);
 	
 	
 }

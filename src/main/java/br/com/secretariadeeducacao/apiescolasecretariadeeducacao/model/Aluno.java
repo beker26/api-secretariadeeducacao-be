@@ -55,4 +55,9 @@ public class Aluno {
 			return false;
 		return true;
 	}
+
+	public void update(Aluno alunoByForm) {
+		this.nome = alunoByForm.getNome();
+		
+	}
 }

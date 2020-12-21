@@ -20,9 +20,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.AlunoDetailDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.AlunoDto;
-import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.EscolaDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.AlunoForm;
-import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.EscolaForm;
+
 
 @RestController
 @RequestMapping(value = "/v1/escola/{escolaId}/turma/{turmaId}/aluno")
@@ -38,10 +37,10 @@ public interface AlunoApi {
 	ResponseEntity<AlunoDto> insert(@Validated @RequestBody AlunoForm alunoForm,UriComponentsBuilder  uriBuilder);
 	@PutMapping("/{alunoId}")
 	@Transactional
-	ResponseEntity<AlunoDto> update(@PathVariable Integer alunoId, @RequestBody @Validated EscolaForm escolaForm);
+	ResponseEntity<AlunoDto> update(@PathVariable Integer alunoId, @RequestBody @Validated AlunoForm alunoForm);
 	@DeleteMapping("/{alunoId}")
 	@Transactional
 	ResponseEntity<Void> delete(@PathVariable Integer alunoId);
 }
 
-}
+

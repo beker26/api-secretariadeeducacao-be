@@ -1,13 +1,17 @@
 package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+
+import org.hibernate.validator.constraints.Length;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Turma;
 
 public class TurmaForm {
-	@NotBlank(message = "turmaNome Empty")
-	@Size(min = 3, message = "turmaNome must be at least 3 char")
+	
+	@NotNull @NotEmpty @Length(min = 8)
 	private String nomeTurma;
 
 	public TurmaForm() {

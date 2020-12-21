@@ -14,4 +14,6 @@ public interface TurmaService {
 	Turma update(Integer escolaId, Integer turmaId, Turma turmaByForm);
 	
 	void delete(Integer escolaId,Integer turmaId );
+
+	void matricula(Integer escolaId, Integer turmaId, Integer idAluno);
 }

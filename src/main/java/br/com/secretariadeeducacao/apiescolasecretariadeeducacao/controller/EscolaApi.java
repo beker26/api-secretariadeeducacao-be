@@ -20,9 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.EscolaDetailDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.EscolaDto;
-import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.TurmaDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.EscolaForm;
-import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.TurmaForm;
 
 
 @RestController

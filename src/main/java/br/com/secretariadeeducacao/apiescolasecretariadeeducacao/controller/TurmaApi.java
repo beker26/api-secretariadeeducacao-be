@@ -20,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.TurmaDetailDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.TurmaDto;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.MatriculaForm;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.TurmaForm;
 
 
@@ -38,6 +39,11 @@ public interface TurmaApi {
 	@PutMapping("/{turmaId}")
 	@Transactional
 	ResponseEntity<TurmaDto> update(@PathVariable Integer escolaId, @PathVariable Integer turmaId, @RequestBody @Validated TurmaForm escolaForm);
+
+	@PostMapping("/{turmaId}/matricula")
+	@Transactional
+	ResponseEntity<TurmaDto> matricula(@PathVariable Integer escolaId, @PathVariable Integer turmaId, @RequestBody @Validated MatriculaForm matriculaForm);
+	
 	@DeleteMapping("/{turmaId}")
 	@Transactional
 	ResponseEntity<Void> delete(@PathVariable Integer escolaId, @PathVariable Integer turmaId);

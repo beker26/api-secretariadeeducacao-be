@@ -1,7 +1,5 @@
 package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller;
 
-
-
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +23,6 @@ import lombok.extern.log4j.Log4j2;
 public class AlunoController implements AlunoApi {
 
 	private AlunoService alunoService;
-	
 
 	public AlunoController(AlunoService alunoService) {
 		this.alunoService = alunoService;
@@ -63,12 +60,11 @@ public class AlunoController implements AlunoApi {
 	public ResponseEntity<AlunoDto> update(Integer alunoId, AlunoForm alunoForm) {
 		log.info("Starting Method Update in Aluno Controller!");
 		log.info("Form: {}", alunoForm);
-		alunoService.update(alunoId,alunoForm.toAluno());
+		alunoService.update(alunoId, alunoForm.toAluno());
 		log.info("Finishing Method Update in Aluno Controller!");
 		return ResponseEntity.noContent().build();
 	}
 
-	
 	@Override
 	public ResponseEntity<Void> delete(Integer alunoId) {
 		log.info("Starting Method Delete in Aluno Controller!");

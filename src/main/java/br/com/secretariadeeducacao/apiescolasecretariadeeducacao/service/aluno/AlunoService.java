@@ -2,9 +2,7 @@ package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.aluno;
 
 import java.util.List;
 
-
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Aluno;
-import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Escola;
 
 public interface AlunoService {
 
@@ -17,6 +15,5 @@ public interface AlunoService {
 	Aluno update(Integer alunoId, Aluno alunoObj);
 
 	void delete(Integer alunoId);
-	
-	
+
 }

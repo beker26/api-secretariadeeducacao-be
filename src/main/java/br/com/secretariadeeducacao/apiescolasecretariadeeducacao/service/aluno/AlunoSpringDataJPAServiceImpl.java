@@ -32,7 +32,8 @@ public class AlunoSpringDataJPAServiceImpl implements AlunoService {
 		log.info("Starting Method findById in ALunoSpringDataJPAService");
 		log.info("Parameter:{}", alunoId);
 		log.info("Finding Escola by id on ALunoRepository");
-		Aluno aluno = alunoRepository.findById(alunoId).orElseThrow(() -> new RuntimeException("Objeto não encontrado"));
+		Aluno aluno = alunoRepository.findById(alunoId)
+				.orElseThrow(() -> new RuntimeException("Objeto não encontrado"));
 		log.info("Finishing Method findById in ALunoSpringDataJPAService");
 		return aluno;
 	}
@@ -59,19 +60,16 @@ public class AlunoSpringDataJPAServiceImpl implements AlunoService {
 	@Override
 	public void delete(Integer alunoId) {
 		log.info("Starting Method Delete in ALunoSpringDataJPAService");
-		log.info("Parameter:Aluno Id = {}," , alunoId);
+		log.info("Parameter:Aluno Id = {},", alunoId);
 		findById(alunoId);
 		log.info("Deleting escola by id on AlunoRepository");
 		try {
 			alunoRepository.deleteById(alunoId);
-		}
-		catch (DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Não é possível excluir");
 		}
 		log.info("Finishing Method deleteById in ALunoSpringDataJPAService");
-		
-	}
 
-	
+	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.TurmaDetailDto;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.TurmaDto;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.MatriculaForm;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.controller.dto.form.TurmaForm;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Turma;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.turma.TurmaService;
@@ -56,7 +57,6 @@ public class TurmaController implements TurmaApi {
 
 	@Override
 	public ResponseEntity<TurmaDto> update(Integer escolaId, Integer turmaId, TurmaForm turmaForm) {
-
 		log.info("Starting Method Update in Turma Controller!");
 		log.info("Form: {}", turmaForm);
 		turmaService.update(escolaId,turmaId,turmaForm.toTurma());
@@ -70,6 +70,15 @@ public class TurmaController implements TurmaApi {
 		log.info("Starting Method Delete in Turma Controller!");
 		turmaService.delete(escolaId,turmaId);
 		log.info("Finishing Method Delete in Turma Controller!");
+		return ResponseEntity.noContent().build();
+	}
+
+	@Override
+	public ResponseEntity<TurmaDto> matricula(Integer escolaId, Integer turmaId, MatriculaForm matriculaForm) {
+		log.info("Starting Method Update in Turma Controller!");
+		log.info("Form: {}", matriculaForm);
+		turmaService.matricula(escolaId,turmaId,matriculaForm.getIdAluno());
+		log.info("Finishing Method Update in Turma Controller!");
 		return ResponseEntity.noContent().build();
 	}
 

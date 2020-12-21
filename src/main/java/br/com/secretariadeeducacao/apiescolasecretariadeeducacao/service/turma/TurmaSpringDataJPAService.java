@@ -6,8 +6,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.Repository.TurmaRepository;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Aluno;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Escola;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Turma;
+import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.aluno.AlunoService;
 import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.service.escola.EscolaService;
 import lombok.extern.log4j.Log4j2;
 
@@ -16,10 +18,13 @@ import lombok.extern.log4j.Log4j2;
 public class TurmaSpringDataJPAService implements TurmaService {
 	private TurmaRepository turmaRepository;
 	private EscolaService escolaService;
+	private AlunoService alunoService;
 
-	public TurmaSpringDataJPAService(TurmaRepository turmaRepository, EscolaService escolaService) {
+	public TurmaSpringDataJPAService(TurmaRepository turmaRepository, EscolaService escolaService,
+			AlunoService alunoService) {
 		this.turmaRepository = turmaRepository;
 		this.escolaService = escolaService;
+		this.alunoService = alunoService;
 	}
 
 	@Override
@@ -43,36 +48,44 @@ public class TurmaSpringDataJPAService implements TurmaService {
 
 	@Override
 	public Turma insert(Integer escolaId, Turma turmaByForm) {
-		log.info("Starting Method save in EscolaSpringDataJPAService");
+		log.info("Starting Method save in TurmaSpringDataJPAService");
 		Escola escolaById = escolaService.findById(escolaId);
 		turmaByForm.setEscola(escolaById);
 		turmaByForm = turmaRepository.save(turmaByForm);
-		log.info("Finishing Method save in EscolaSpringDataJPAService");
+		log.info("Finishing Method save in TurmaSpringDataJPAService");
 		return turmaByForm;
 	}
-	
+
 	@Override
-	public Turma update(Integer escolaId,Integer turmaId, Turma turmaByForm) {
-		log.info("Starting Method save in EscolaSpringDataJPAService");
+	public Turma update(Integer escolaId, Integer turmaId, Turma turmaByForm) {
+		log.info("Starting Method save in TurmaSpringDataJPAService");
 		Turma turmaByEscolaIdAndTurmaId = findTurmaByEscolaIdAndTurmaId(escolaId, turmaId);
 		turmaByEscolaIdAndTurmaId.update(turmaByForm);
 		turmaByForm = turmaRepository.save(turmaByEscolaIdAndTurmaId);
-		log.info("Finishing Method save in EscolaSpringDataJPAService");
+		log.info("Finishing Method save in TurmaSpringDataJPAService");
 		return turmaByForm;
 	}
-	
-	public void delete(Integer escolaId,Integer turmaId ) {
-		log.info("Starting Method Delete in EscolaSpringDataJPAService");
-		log.info("Parameter:Escola Id = {}," , escolaId);
-		Turma turmaByEscolaIdAndTurmaId = findTurmaByEscolaIdAndTurmaId(escolaId,turmaId);
+
+	public void delete(Integer escolaId, Integer turmaId) {
+		log.info("Starting Method Delete in TurmaSpringDataJPAService");
+		log.info("Parameter:Escola Id = {},", escolaId);
+		Turma turmaByEscolaIdAndTurmaId = findTurmaByEscolaIdAndTurmaId(escolaId, turmaId);
 		log.info("Deleting escola by id on escolaRepository");
 		try {
-//			turmaRepository.deleteByTurma_EscolaIdAndTurmaId(escolaId,turmaId);
 			turmaRepository.delete(turmaByEscolaIdAndTurmaId);
-		}
-		catch (DataIntegrityViolationException e) {
+		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityViolationException("Não é possível excluir");
 		}
-		log.info("Finishing Method deleteById in EscolaSpringDataJPAService");
+		log.info("Finishing Method deleteById in TurmaSpringDataJPAService");
+	}
+
+	@Override
+	public void matricula(Integer escolaId, Integer turmaId, Integer idAluno) {
+		log.info("Starting Method matricula in TurmaSpringDataJPAService");
+		Turma turmaByEscolaIdAndTurmaId = findTurmaByEscolaIdAndTurmaId(escolaId, turmaId);
+		Aluno alunoById = alunoService.findById(idAluno);
+		turmaByEscolaIdAndTurmaId.matriculaAluno(alunoById);
+		turmaRepository.save(turmaByEscolaIdAndTurmaId);
+		log.info("Finishing Method matricula in TurmaSpringDataJPAService");
 	}
 }

@@ -1,6 +1,7 @@
 package br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -47,10 +48,10 @@ public class Turma {
 	}
 
 	public List<Aluno> getAlunos() {
-		return alunos;
+		return Collections.unmodifiableList(this.alunos);
 	}
 
-	public void adicionaAluno(Aluno aluno) {
+	public void matriculaAluno(Aluno aluno) {
 		this.alunos.add(aluno);
 	}
 

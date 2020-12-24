@@ -7,5 +7,7 @@ import br.com.secretariadeeducacao.apiescolasecretariadeeducacao.model.Aluno;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Integer>  {
+	
+	
 
 }
